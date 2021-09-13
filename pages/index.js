@@ -14,6 +14,8 @@ export async function getStaticProps() {
     props: {
       events: featuredEvents,
     },
+    // every 30 min revalidate page SWR could to
+    revalidate: 1800,
   };
 }
 export default HomePage;

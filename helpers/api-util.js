@@ -3,12 +3,10 @@ export async function getAllEvents() {
     "https://events-real-default-rtdb.firebaseio.com/events.json"
   );
   const data = await response.json();
-  console.log("data", data);
   const events = [];
 
   //   object to array
   for (const key in data) {
-    console.log("entrei");
     events.push({
       is: key,
       ...data[key],
@@ -21,4 +19,24 @@ export async function getAllEvents() {
 export async function getFeaturedEvents() {
   const allEvents = await getAllEvents();
   return allEvents.filter((event) => event.isFeatured);
+}
+
+export async function getEventById(id) {
+  const allEvents = await getAllEvents();
+  return allEvents.find((event) => event.is === id);
+}
+
+export async function getFilteredEvents(dateFilter) {
+  const { year, month } = dateFilter;
+
+  const allEvents = await getAllEvents();
+
+  let filteredEvents = allEvents.filter((event) => {
+    const eventDate = new Date(event.date);
+    return (
+      eventDate.getFullYear() === year && eventDate.getMonth() === month - 1
+    );
+  });
+
+  return filteredEvents;
 }
