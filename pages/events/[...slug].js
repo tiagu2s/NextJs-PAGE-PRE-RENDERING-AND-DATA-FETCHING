@@ -12,16 +12,13 @@ function FilteredEventsPage(props) {
   const [loadedEvents, setLoadedEvents] = useState();
   const router = useRouter();
 
-
   const filterData = router.query.slug;
 
   const { data, error } = useSWR(
-    'https://events-real-default-rtdb.firebaseio.com/events.json'
+    'https://nextjs-course-c81cc-default-rtdb.firebaseio.com/events.json'
   );
 
   useEffect(() => {
-    console.log(data);
-
     if (data) {
       const events = [];
 

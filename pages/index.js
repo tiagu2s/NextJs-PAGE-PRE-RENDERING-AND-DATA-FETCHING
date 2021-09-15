@@ -1,5 +1,6 @@
-import EventList from "../components/events/event-list";
-import { getFeaturedEvents } from "../helpers/api-util";
+import { getFeaturedEvents } from '../helpers/api-util';
+import EventList from '../components/events/event-list';
+
 function HomePage(props) {
   return (
     <div>
@@ -10,12 +11,13 @@ function HomePage(props) {
 
 export async function getStaticProps() {
   const featuredEvents = await getFeaturedEvents();
+
   return {
     props: {
-      events: featuredEvents,
+      events: featuredEvents
     },
-    // every 30 min revalidate page SWR could to
-    revalidate: 1800,
-  };
+    revalidate: 1800
+  }
 }
+
 export default HomePage;
